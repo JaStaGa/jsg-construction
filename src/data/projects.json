@@ -1,0 +1,19 @@
+[
+    {
+        "tags": [
+            "kitchen",
+            "remodel"
+        ],
+        "before": "https://images.unsplash.com/photo-1493666438817-866a91353ca9?q=80&w=1200",
+        "after": "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1200",
+        "caption": "Beacon Ridge kitchen remodel"
+    },
+    {
+        "tags": [
+            "bathroom"
+        ],
+        "before": "https://images.unsplash.com/photo-1552324190-9e86fa095c4a?q=80&w=1200",
+        "after": "https://images.unsplash.com/photo-1564540583246-934409427776?q=80&w=1200",
+        "caption": "Bright, low-maintenance bath"
+    }
+]

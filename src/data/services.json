@@ -1,0 +1,23 @@
+[
+    {
+        "slug": "kitchen-remodel",
+        "title": "Kitchen Remodels",
+        "excerpt": "Design, cabinets, counters, plumbing.",
+        "icon": "Hammer",
+        "copy": "Full-service kitchen renovations, permits to punchlist."
+    },
+    {
+        "slug": "bathroom-renovation",
+        "title": "Bathroom Renovations",
+        "excerpt": "Tile, fixtures, waterproofing.",
+        "icon": "Wrench",
+        "copy": "Modern, durable bathrooms with proper ventilation."
+    },
+    {
+        "slug": "additions",
+        "title": "Home Additions",
+        "excerpt": "Expand your living space.",
+        "icon": "Home",
+        "copy": "Seamless additions that match your home."
+    }
+]

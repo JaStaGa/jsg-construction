@@ -1,103 +1,53 @@
 import Image from "next/image";
+import Link from "next/link";
+import JsonLd from "@/components/site/json-ld";
 
-export default function Home() {
+export const generateMetadata = () => ({
+  title: "General Contractor | JSG Construction",
+  description: "Local contractor. Kitchens, baths, additions. Free quotes.",
+  alternates: { canonical: "/" },
+  openGraph: { title: "General Contractor | JSG Construction", description: "Local contractor. Kitchens, baths, additions. Free quotes.", url: "/" }
+});
+
+export default function HomePage() {
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "JSG Construction",
+    telephone: "+1-555-555-0123",
+    areaServed: "Beacon Ridge",
+    url: "https://jsg-construction.vercel.app"
+  };
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <>
+      <section className="relative">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+          src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600"
+          alt="Construction site"
+          width={1600} height={800} priority className="w-full h-[56vh] object-cover"
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="mx-auto max-w-screen-xl px-4 text-white">
+            <h1 className="text-3xl md:text-5xl font-bold">Built right. On time.</h1>
+            <p className="mt-3 max-w-xl">Trusted general contractor serving Beacon Ridge and nearby towns.</p>
+            <div className="mt-6 flex gap-3">
+              <Link href="/contact" className="bg-[color:var(--brand-gold)] text-black px-5 py-3 rounded">Get a Free Quote</Link>
+              <Link href="/projects" className="px-5 py-3 border border-white rounded">See Projects</Link>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <section className="mx-auto max-w-screen-xl px-4 py-12 grid gap-6 md:grid-cols-3">
+        {["Licensed", "Insured", "Free Estimates"].map(b => (
+          <div key={b} className="rounded-xl border p-6">
+            <p className="text-lg font-semibold">{b}</p>
+            <p className="text-sm text-slate-600 mt-1">JSG Construction</p>
+          </div>
+        ))}
+      </section>
+      <JsonLd data={ld} />
+    </>
   );
 }
