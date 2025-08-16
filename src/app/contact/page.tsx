@@ -1,27 +1,28 @@
-"use client";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import ky from "ky";
+"use client"
+import { useState } from "react"
+import { useForm, type SubmitHandler } from "react-hook-form"
+import { z } from "zod"
+import ky from "ky"
 
 const schema = z.object({
     name: z.string().min(2),
     email: z.string().email(),
     phone: z.string().optional(),
     message: z.string().min(10),
-});
+})
+type FormValues = z.infer<typeof schema>
 
 export default function ContactPage() {
-    const { register, handleSubmit, reset } = useForm();
-    const [ok, setOk] = useState<string | null>(null);
+    const { register, handleSubmit, reset } = useForm<FormValues>()
+    const [ok, setOk] = useState<string | null>(null)
 
-    const onSubmit = async (form: any) => {
-        const parsed = schema.safeParse(form);
-        if (!parsed.success) return setOk("Please complete all fields.");
-        const r = await ky.post("/api/contact", { json: parsed.data }).json<{ ok: boolean }>();
-        setOk(r.ok ? "Message sent." : "Try again later.");
-        if (r.ok) reset();
-    };
+    const onSubmit: SubmitHandler<FormValues> = async (form) => {
+        const parsed = schema.safeParse(form)
+        if (!parsed.success) return setOk("Please complete all fields.")
+        const r = await ky.post("/api/contact", { json: parsed.data }).json<{ ok: boolean }>()
+        setOk(r.ok ? "Message sent." : "Try again later.")
+        if (r.ok) reset()
+    }
 
     return (
         <div className="mx-auto max-w-screen-xl px-4 py-12 grid md:grid-cols-2 gap-8">
@@ -40,5 +41,5 @@ export default function ContactPage() {
                 <div className="mt-6 h-56 rounded-xl bg-[color:var(--brand-gray)]" aria-label="Service area map"></div>
             </div>
         </div>
-    );
+    )
 }

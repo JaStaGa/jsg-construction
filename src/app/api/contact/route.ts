@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import nodemailer from "nodemailer"
+import { z } from "zod"
 
 export const runtime = "nodejs"
 
@@ -11,12 +12,22 @@ function rateLimit(ip: string, limit = 5, windowMs = 60_000) {
     entry.n++; entry.t = now; return entry.n > limit
 }
 
+const Body = z.object({
+    name: z.string().min(2),
+    email: z.string().email(),
+    phone: z.string().optional(),
+    message: z.string().min(10),
+})
+type BodyT = z.infer<typeof Body>
+
 export async function POST(req: NextRequest) {
     const ip = req.headers.get("x-forwarded-for") ?? "unknown"
     if (rateLimit(ip)) return NextResponse.json({ ok: false }, { status: 429 })
 
-    const { name, email, phone, message } = await req.json().catch(() => ({}))
-    if (!name || !email || !message) return NextResponse.json({ ok: false }, { status: 400 })
+    const raw = (await req.json().catch(() => null)) as unknown
+    const parsed = Body.safeParse(raw)
+    if (!parsed.success) return NextResponse.json({ ok: false }, { status: 400 })
+    const { name, email, phone, message } = parsed.data as BodyT
 
     const test = await nodemailer.createTestAccount()
     const transporter = nodemailer.createTransport({
