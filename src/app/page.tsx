@@ -3,16 +3,14 @@ import Link from "next/link";
 import JsonLd from "@/components/site/json-ld";
 import TestimonialCarousel from "@/components/site/testimonial-carousel";
 import FAQ from "@/components/site/faq";
+import Section from "@/components/site/section";
+import QuickBadges from "@/components/site/quick-badges";
 
 export const generateMetadata = () => ({
   title: "General Contractor | JSG Construction",
   description: "Local contractor. Kitchens, baths, additions. Free quotes.",
   alternates: { canonical: "/" },
-  openGraph: {
-    title: "General Contractor | JSG Construction",
-    description: "Local contractor. Kitchens, baths, additions. Free quotes.",
-    url: "/",
-  },
+  openGraph: { title: "General Contractor | JSG Construction", description: "Local contractor. Kitchens, baths, additions. Free quotes.", url: "/" },
 });
 
 export default function HomePage() {
@@ -33,38 +31,31 @@ export default function HomePage() {
           alt="Construction site"
           width={1600}
           height={800}
+          sizes="100vw"
           priority
-          className="w-full h-[56vh] object-cover"
+          className="w-full h-[68vh] md:h-[72vh] object-cover"
         />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto max-w-screen-xl px-4 text-white">
             <h1 className="text-3xl md:text-5xl font-bold">Built right. On time.</h1>
-            <p className="mt-3 max-w-xl">
-              Trusted general contractor serving Beacon Ridge and nearby towns.
-            </p>
+            <p className="mt-3 max-w-xl">Trusted general contractor serving Beacon Ridge and nearby towns.</p>
             <div className="mt-6 flex gap-3">
-              <Link href="/contact" className="bg-[color:var(--brand-gold)] text-black px-5 py-3 rounded">
-                Get a Free Quote
-              </Link>
-              <Link href="/projects" className="px-5 py-3 border border-white rounded">
-                See Projects
-              </Link>
+              <Link href="/contact" className="bg-[color:var(--brand-gold)] text-black px-5 py-3 rounded">Get a Free Quote</Link>
+              <Link href="/projects" className="px-5 py-3 border border-white rounded">See Projects</Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-screen-xl px-4 py-12 grid gap-6 md:grid-cols-3">
-        {["Licensed", "Insured", "Free Estimates"].map((b) => (
-          <div key={b} className="rounded-xl border p-6">
-            <p className="text-lg font-semibold">{b}</p>
-            <p className="text-sm text-slate-600 mt-1">JSG Construction</p>
-          </div>
-        ))}
-      </section>
+      <Section>
+        <QuickBadges />
+      </Section>
 
-      <TestimonialCarousel />
+      <Section>
+        <TestimonialCarousel />
+      </Section>
+
       <FAQ />
       <JsonLd data={ld} />
     </>
