@@ -12,6 +12,8 @@ export const metadata = { /* unchanged */ }
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.variable}>
+      {/* Analytics */}
+      <script defer data-domain="jsg-construction.vercel.app" src="https://plausible.io/js/script.js"></script>
       <body className="min-h-screen bg-[color:var(--bg)] text-slate-900">
         <StickyQuoteBar />
         <Header />

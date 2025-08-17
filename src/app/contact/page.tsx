@@ -4,6 +4,9 @@ import { useForm, type SubmitHandler } from "react-hook-form"
 import { z } from "zod"
 import ky from "ky"
 import { toast } from "sonner"
+import dynamic from "next/dynamic"
+
+const ContactMap = dynamic(() => import("@/components/site/contact-map"), { ssr: false })
 
 const schema = z.object({
     name: z.string().min(2),
@@ -56,7 +59,12 @@ export default function ContactPage() {
                 <p className="mb-2 font-semibold">JSG Construction</p>
                 <p>Mon–Fri 8–5</p>
                 <p className="mt-2"><a href="tel:+15555550123" className="underline">(555) 555-0123</a></p>
-                <div className="mt-6 h-56 rounded-xl bg-[color:var(--brand-gray)]" aria-label="Service area map"></div>
+                <div className="mt-6" aria-label="Service area map">
+                    <ContactMap />
+                    <p className="mt-2 text-xs text-slate-500">
+                        Map data &copy; OpenStreetMap contributors.
+                    </p>
+                </div>
             </div>
         </div>
     )
