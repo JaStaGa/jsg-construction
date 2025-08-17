@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Section from "@/components/site/section"
 import JsonLd from "@/components/site/json-ld"
+import Breadcrumbs from "@/components/site/breadcrumbs"
 
 export const generateMetadata = () => ({
     title: "About | JSG Construction",
@@ -13,6 +14,7 @@ export default function AboutPage() {
     const site = "https://jsg-construction.vercel.app"
     return (
         <>
+            <Breadcrumbs items={[{ href: "/", label: "Home" }, { href: "/about", label: "About" }]} />
             <Section className="grid gap-10 md:grid-cols-2 items-center">
                 <div>
                     <h1 className="text-3xl font-bold text-[color:var(--brand-navy)]">Built on trust</h1>

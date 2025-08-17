@@ -1,10 +1,12 @@
 "use client"
+
 import { useState } from "react"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { z } from "zod"
 import ky from "ky"
 import { toast } from "sonner"
 import dynamic from "next/dynamic"
+import { track } from "@/lib/analytics"
 
 const ContactMap = dynamic(() => import("@/components/site/contact-map"), { ssr: false })
 
@@ -18,17 +20,24 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>
 
 export default function ContactPage() {
-    const { register, handleSubmit, reset } = useForm<FormValues>()
+    const { register, handleSubmit, reset } = useForm<FormValues>({
+        defaultValues: { service: "Kitchen Remodels" },
+    })
     const [submitting, setSubmitting] = useState(false)
 
     const onSubmit: SubmitHandler<FormValues> = async (form) => {
         const parsed = schema.safeParse(form)
-        if (!parsed.success) return toast.error("Please complete all required fields.")
+        if (!parsed.success) { toast.error("Please complete all required fields."); return }
         setSubmitting(true)
         try {
-            const r = await ky.post("/api/contact", { json: parsed.data }).json<{ ok: boolean }>()
-            if (r.ok) { toast.success("Message sent. We’ll reply soon."); reset() }
-            else toast.error("Could not send. Try again later.")
+            const res = await ky.post("/api/contact", { json: parsed.data }).json<{ ok: boolean }>()
+            if (res.ok) {
+                track("lead_submit", { service: parsed.data.service })
+                toast.success("Message sent. We’ll reply soon.")
+                reset()
+            } else {
+                toast.error("Could not send. Try again later.")
+            }
         } catch {
             toast.error("Network error. Try again later.")
         } finally {
@@ -42,7 +51,7 @@ export default function ContactPage() {
                 <input {...register("name")} placeholder="Name *" className="w-full border rounded p-3" />
                 <input {...register("email")} placeholder="Email *" className="w-full border rounded p-3" />
                 <input {...register("phone")} placeholder="Phone" className="w-full border rounded p-3" />
-                <select {...register("service")} className="w-full border rounded p-3" defaultValue="Kitchen Remodels">
+                <select {...register("service")} className="w-full border rounded p-3">
                     <option>Kitchen Remodels</option>
                     <option>Bathroom Renovations</option>
                     <option>Home Additions</option>
@@ -61,9 +70,7 @@ export default function ContactPage() {
                 <p className="mt-2"><a href="tel:+15555550123" className="underline">(555) 555-0123</a></p>
                 <div className="mt-6" aria-label="Service area map">
                     <ContactMap />
-                    <p className="mt-2 text-xs text-slate-500">
-                        Map data &copy; OpenStreetMap contributors.
-                    </p>
+                    <p className="mt-2 text-xs text-slate-500">Map data © OpenStreetMap contributors.</p>
                 </div>
             </div>
         </div>

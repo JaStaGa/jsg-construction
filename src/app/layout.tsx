@@ -7,7 +7,12 @@ import { Toaster } from "sonner"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
-export const metadata = { /* unchanged */ }
+export const metadata = {
+  metadataBase: new URL("https://jsg-construction.vercel.app"),
+  title: "JSG Construction | General Contractor",
+  description: "Licensed, insured general contractor. Free estimates.",
+  twitter: { card: "summary_large_image", title: "JSG Construction", description: "General contractor in Beacon Ridge" },
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

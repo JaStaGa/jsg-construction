@@ -27,7 +27,7 @@ export default function HomePage() {
     <>
       <section className="relative">
         <Image
-          src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600"
+          src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1400"
           alt="Construction site"
           width={1600}
           height={800}
