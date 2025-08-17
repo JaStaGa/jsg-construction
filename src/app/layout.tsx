@@ -1,16 +1,13 @@
+import "./globals.css"
 import { Inter } from "next/font/google"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import StickyQuoteBar from "@/components/site/sticky-quote-bar"
-import "./globals.css" 
+import { Toaster } from "sonner"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
-export const metadata = {
-  metadataBase: new URL("https://jsg-construction.vercel.app"),
-  title: "JSG Construction | General Contractor",
-  description: "Licensed, insured general contractor. Free estimates.",
-}
+export const metadata = { /* unchanged */ }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   )

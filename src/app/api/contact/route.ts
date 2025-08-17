@@ -16,6 +16,7 @@ const Body = z.object({
     name: z.string().min(2),
     email: z.string().email(),
     phone: z.string().optional(),
+    service: z.enum(["Kitchen Remodels", "Bathroom Renovations", "Home Additions", "Other"]),
     message: z.string().min(10),
 })
 type BodyT = z.infer<typeof Body>
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest) {
     const raw = (await req.json().catch(() => null)) as unknown
     const parsed = Body.safeParse(raw)
     if (!parsed.success) return NextResponse.json({ ok: false }, { status: 400 })
-    const { name, email, phone, message } = parsed.data as BodyT
+    const { name, email, phone, service, message } = parsed.data as BodyT
 
     const test = await nodemailer.createTestAccount()
     const transporter = nodemailer.createTransport({
@@ -38,8 +39,8 @@ export async function POST(req: NextRequest) {
     const info = await transporter.sendMail({
         from: `"JSG Construction" <no-reply@jsg-demo.local>`,
         to: "test@inbox.local",
-        subject: `New inquiry from ${name}`,
-        text: `From: ${name} <${email}> ${phone || ""}\n\n${message}`,
+        subject: `New inquiry: ${service} — ${name}`,
+        text: `Service: ${service}\nFrom: ${name} <${email}> ${phone || ""}\n\n${message}`,
     })
 
     console.log("Preview URL:", nodemailer.getTestMessageUrl(info))
