@@ -4,8 +4,8 @@
             "kitchen",
             "remodel"
         ],
-        "before": "https://images.unsplash.com/photo-1493666438817-866a91353ca9?q=80&w=1200",
-        "after": "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1200",
+        "before": "/projects/kitchen-1-before.webp",
+        "after": "/projects/kitchen-1-after.webp",
         "caption": "Beacon Ridge kitchen remodel"
     },
     {
@@ -13,8 +13,8 @@
             "bathroom",
             "tile"
         ],
-        "before": "https://images.unsplash.com/photo-1552324190-9e86fa095c4a?q=80&w=1200",
-        "after": "https://images.unsplash.com/photo-1564540583246-934409427776?q=80&w=1200",
+        "before": "/projects/bath-1-before.webp",
+        "after": "/projects/bath-1-after.webp",
         "caption": "Bright, low-maintenance bath"
     },
     {
@@ -22,8 +22,8 @@
             "addition",
             "exterior"
         ],
-        "before": "https://images.unsplash.com/photo-1560185008-b033106af2fb?q=80&w=1200",
-        "after": "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1200",
+        "before": "/projects/rear-1-before.webp",
+        "after": "/projects/rear-1-after.webp",
         "caption": "Seamless rear addition"
     },
     {
@@ -31,8 +31,8 @@
             "flooring",
             "living-room"
         ],
-        "before": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200",
-        "after": "https://images.unsplash.com/photo-1505692794403-34d4982c7683?q=80&w=1200",
+        "before": "/projects/floor-1-before.webp",
+        "after": "/projects/floor-1-after.webp",
         "caption": "Wide-plank oak floors"
     },
     {
@@ -40,8 +40,8 @@
             "deck",
             "exterior"
         ],
-        "before": "https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1200",
-        "after": "https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1200",
+        "before": "/projects/deck-1-before.webp",
+        "after": "/projects/deck-1-after.webp",
         "caption": "Composite deck upgrade"
     },
     {
@@ -49,8 +49,8 @@
             "basement",
             "remodel"
         ],
-        "before": "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?q=80&w=1200",
-        "after": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200",
+        "before": "/projects/basement-1-before.webp",
+        "after": "/projects/basement-1-after.webp",
         "caption": "Basement family room"
     }
 ]
